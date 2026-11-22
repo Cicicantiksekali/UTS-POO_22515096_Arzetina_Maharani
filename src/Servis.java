@@ -54,6 +54,10 @@ public class Servis {
         this.statusAktif = aktif;
     }
 
+    public String getIdServis() {
+        return idServis;
+    }
+
     public void tampilkanInfo() {
         System.out.println("ID Servis        : " + idServis);
         System.out.println("Tanggal Servis   : " + tanggalServis);

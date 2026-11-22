@@ -33,4 +33,5 @@ public class Mekanik {
     public void ubahStatus(boolean status) {
         this.statusTersedia = status;
     }
+
 }

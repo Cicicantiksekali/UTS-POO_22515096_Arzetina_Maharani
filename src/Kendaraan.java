@@ -57,4 +57,5 @@ public class Kendaraan {
     public boolean validasiNomorPolisi() {
         return nomorPolisi != null && !nomorPolisi.isBlank();
     }
+
 }

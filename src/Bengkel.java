@@ -1,4 +1,5 @@
 package src;
+
 import java.util.ArrayList;
 
 public class Bengkel {
@@ -13,7 +14,7 @@ public class Bengkel {
     private ArrayList<Servis> daftarServis = new ArrayList<Servis>();
 
     public Bengkel(String idBengkel, String namaBengkel, String alamat,
-                   String nomorTelepon, String jamOperasional) {
+            String nomorTelepon, String jamOperasional) {
         this.idBengkel = idBengkel;
         this.namaBengkel = namaBengkel;
         this.alamat = alamat;
@@ -50,6 +51,8 @@ public class Bengkel {
     }
 
     public void tampilkanLaporan() {
+        System.out.println("Nama Bengkel : " + namaBengkel);
+        System.out.println("Alamat       : " + alamat);
         if (daftarServis.isEmpty()) {
             System.out.println("Belum ada servis.");
             return;
@@ -63,6 +66,15 @@ public class Bengkel {
         System.out.println("Total biaya seluruh servis: " + total);
     }
 
+    public Servis cariServisById(String id) {
+        for (Servis s : daftarServis) {
+            if (s.getIdServis().equalsIgnoreCase(id)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Kendaraan> getDaftarKendaraan() {
         return daftarKendaraan;
     }
@@ -71,20 +83,45 @@ public class Bengkel {
         return daftarMekanik;
     }
 
-    public String getIdBengkel() { return idBengkel; }
-    public void setIdBengkel(String idBengkel) { this.idBengkel = idBengkel; }
+    public String getIdBengkel() {
+        return idBengkel;
+    }
 
-    public String getNamaBengkel() { return namaBengkel; }
-    public void setNamaBengkel(String namaBengkel) { this.namaBengkel = namaBengkel; }
+    public void setIdBengkel(String idBengkel) {
+        this.idBengkel = idBengkel;
+    }
 
-    public String getAlamat() { return alamat; }
-    public void setAlamat(String alamat) { this.alamat = alamat; }
+    public String getNamaBengkel() {
+        return namaBengkel;
+    }
 
-    public String getNomorTelepon() { return nomorTelepon; }
-    public void setNomorTelepon(String nomorTelepon) { this.nomorTelepon = nomorTelepon; }
+    public void setNamaBengkel(String namaBengkel) {
+        this.namaBengkel = namaBengkel;
+    }
 
-    public String getJamOperasional() { return jamOperasional; }
-    public void setJamOperasional(String jamOperasional) { this.jamOperasional = jamOperasional; }
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getNomorTelepon() {
+        return nomorTelepon;
+    }
+
+    public void setNomorTelepon(String nomorTelepon) {
+        this.nomorTelepon = nomorTelepon;
+    }
+
+    public String getJamOperasional() {
+        return jamOperasional;
+    }
+
+    public void setJamOperasional(String jamOperasional) {
+        this.jamOperasional = jamOperasional;
+    }
 
     public void tampilkanInfo() {
         System.out.println("ID Bengkel       : " + idBengkel);
