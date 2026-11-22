@@ -1,3 +1,4 @@
+package src;
 public class Servis {
     private String idServis;
     private String tanggalServis;

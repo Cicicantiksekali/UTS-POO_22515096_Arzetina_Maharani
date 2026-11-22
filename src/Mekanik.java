@@ -1,3 +1,4 @@
+package src;
 public class Mekanik {
     private String idMekanik;
     private String namaMekanik;
