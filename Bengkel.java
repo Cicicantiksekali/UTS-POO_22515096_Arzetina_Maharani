@@ -11,9 +11,6 @@ public class Bengkel {
     private ArrayList<Mekanik> daftarMekanik = new ArrayList<Mekanik>();
     private ArrayList<Servis> daftarServis = new ArrayList<Servis>();
 
-    public Bengkel() {
-    }
-
     public Bengkel(String idBengkel, String namaBengkel, String alamat,
                    String nomorTelepon, String jamOperasional) {
         this.idBengkel = idBengkel;
