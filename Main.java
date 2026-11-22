@@ -46,7 +46,8 @@ public class Main {
         System.out.println("6. Laporan Servis");
         System.out.println("7. Lihat Riwayat Servis Terakhir");
         System.out.println("8. Keluarkan Riwayat Servis Terakhir");
-        System.out.println("9. Keluar");
+        System.out.println("9. Lihat Detail Bengkel");
+        System.out.println("10. Keluar");
     }
 
     public static void prosesPilihan() {
@@ -182,11 +183,14 @@ public class Main {
                 break;
             }
             case "9":
+                bengkel.tampilkanInfo();
+                break;
+            case "10":
                 System.out.println("Terima kasih. Program selesai.");
                 System.exit(0);
                 break;
             default:
-                System.out.println("Pilihan tidak valid. Masukkan angka 1-9.");
+                System.out.println("Pilihan tidak valid. Masukkan angka 1-10.");
         }
     }
 }

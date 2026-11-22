@@ -70,6 +70,29 @@ public class Bengkel {
         return daftarMekanik;
     }
 
+    public String getIdBengkel() { return idBengkel; }
+    public void setIdBengkel(String idBengkel) { this.idBengkel = idBengkel; }
+
+    public String getNamaBengkel() { return namaBengkel; }
+    public void setNamaBengkel(String namaBengkel) { this.namaBengkel = namaBengkel; }
+
+    public String getAlamat() { return alamat; }
+    public void setAlamat(String alamat) { this.alamat = alamat; }
+
+    public String getNomorTelepon() { return nomorTelepon; }
+    public void setNomorTelepon(String nomorTelepon) { this.nomorTelepon = nomorTelepon; }
+
+    public String getJamOperasional() { return jamOperasional; }
+    public void setJamOperasional(String jamOperasional) { this.jamOperasional = jamOperasional; }
+
+    public void tampilkanInfo() {
+        System.out.println("ID Bengkel       : " + idBengkel);
+        System.out.println("Nama Bengkel     : " + namaBengkel);
+        System.out.println("Alamat           : " + alamat);
+        System.out.println("Nomor Telepon    : " + nomorTelepon);
+        System.out.println("Jam Operasional  : " + jamOperasional);
+    }
+
     public void tampilkanDaftarKendaraan() {
         if (daftarKendaraan.isEmpty()) {
             System.out.println("Belum ada kendaraan.");
