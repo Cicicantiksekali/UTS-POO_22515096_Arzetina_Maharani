@@ -29,7 +29,7 @@ public class Main {
         } while (!valid);
 
         bengkel = new Bengkel(idBengkel, namaBengkel, alamat, nomorTelepon, jamOperasional);
-        riwayatServis = new StackServis(10);
+        riwayatServis = new StackServis(2);
 
         while (true) {
             tampilkanMenu();
