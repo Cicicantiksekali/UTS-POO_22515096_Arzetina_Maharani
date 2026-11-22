@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     private static Bengkel bengkel;
+    private static StackServis riwayatServis;
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -27,6 +28,7 @@ public class Main {
         } while (!valid);
 
         bengkel = new Bengkel(idBengkel, namaBengkel, alamat, nomorTelepon, jamOperasional);
+        riwayatServis = new StackServis(10);
 
         while (true) {
             tampilkanMenu();
@@ -132,6 +134,9 @@ public class Main {
                             Double.parseDouble(biayaJasaInput),
                             Double.parseDouble(biayaSukuCadangInput));
                     if (bengkel.buatServis(servis)) {
+                        if (!riwayatServis.push(servis)) {
+                            System.out.println("Catatan: riwayat servis penuh, transaksi tetap tersimpan.");
+                        }
                         System.out.println("Servis berhasil dibuat.");
                     } else {
                         System.out.println("Gagal: data servis tidak valid.");
@@ -152,10 +157,30 @@ public class Main {
             case "6":
                 bengkel.tampilkanLaporan();
                 break;
-            case "7":
-            case "8":
-                System.out.println("Fitur belum tersedia.");
+            case "7": {
+                Servis terakhir = riwayatServis.peek();
+                if (terakhir == null) {
+                    System.out.println("Riwayat servis kosong.");
+                } else {
+                    System.out.println("Riwayat servis terakhir:");
+                    terakhir.tampilkanInfo();
+                }
                 break;
+            }
+            case "8": {
+                Servis keluar = riwayatServis.pop();
+                if (keluar == null) {
+                    System.out.println("Riwayat servis kosong.");
+                } else {
+                    keluar.ubahStatus(false);
+                    if (keluar.getMekanik() != null) {
+                        keluar.getMekanik().ubahStatus(true);
+                    }
+                    System.out.println("Servis dikeluarkan dari riwayat:");
+                    keluar.tampilkanInfo();
+                }
+                break;
+            }
             case "9":
                 System.out.println("Terima kasih. Program selesai.");
                 System.exit(0);
