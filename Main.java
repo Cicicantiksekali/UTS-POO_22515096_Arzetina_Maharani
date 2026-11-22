@@ -51,16 +51,34 @@ public class Main {
                 }
                 break;
             }
-            case "2":
-            case "3":
-            case "4":
-                bengkel.tampilkanDaftarKendaraan();
+            case "2": {
+                System.out.print("ID Mekanik   : ");
+                String id = sc.nextLine().trim();
+                System.out.print("Nama Mekanik : ");
+                String nama = sc.nextLine().trim();
+                System.out.print("Spesialisasi : ");
+                String spesialisasi = sc.nextLine().trim();
+                System.out.print("No. Telepon  : ");
+                String telepon = sc.nextLine().trim();
+                if (id.isEmpty() || nama.isEmpty() || spesialisasi.isEmpty() || telepon.isEmpty()) {
+                    System.out.println("Gagal: data mekanik tidak boleh kosong.");
+                } else {
+                    bengkel.tambahMekanik(new Mekanik(id, nama, spesialisasi, telepon));
+                    System.out.println("Mekanik berhasil ditambahkan.");
+                }
                 break;
-            case "5":
+            }
+            case "3":
             case "6":
             case "7":
             case "8":
                 System.out.println("Fitur belum tersedia.");
+                break;
+            case "4":
+                bengkel.tampilkanDaftarKendaraan();
+                break;
+            case "5":
+                bengkel.tampilkanDaftarMekanik();
                 break;
             case "9":
                 System.out.println("Terima kasih. Program selesai.");
