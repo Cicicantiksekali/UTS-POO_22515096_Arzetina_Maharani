@@ -1,10 +1,33 @@
 import java.util.Scanner;
 
 public class Main {
-    private static Bengkel bengkel = new Bengkel();
+    private static Bengkel bengkel;
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        System.out.println("=== SETUP BENGKEL ===");
+        String idBengkel, namaBengkel, alamat, nomorTelepon, jamOperasional;
+        boolean valid;
+        do {
+            System.out.print("ID Bengkel       : ");
+            idBengkel = sc.nextLine().trim();
+            System.out.print("Nama Bengkel     : ");
+            namaBengkel = sc.nextLine().trim();
+            System.out.print("Alamat           : ");
+            alamat = sc.nextLine().trim();
+            System.out.print("Nomor Telepon    : ");
+            nomorTelepon = sc.nextLine().trim();
+            System.out.print("Jam Operasional  : ");
+            jamOperasional = sc.nextLine().trim();
+            valid = !idBengkel.isEmpty() && !namaBengkel.isEmpty() && !alamat.isEmpty()
+                    && !nomorTelepon.isEmpty() && !jamOperasional.isEmpty();
+            if (!valid) {
+                System.out.println("Semua data wajib diisi. Ulangi.\n");
+            }
+        } while (!valid);
+
+        bengkel = new Bengkel(idBengkel, namaBengkel, alamat, nomorTelepon, jamOperasional);
+
         while (true) {
             tampilkanMenu();
             prosesPilihan();
@@ -68,17 +91,70 @@ public class Main {
                 }
                 break;
             }
-            case "3":
-            case "6":
-            case "7":
-            case "8":
-                System.out.println("Fitur belum tersedia.");
+            case "3": {
+                if (bengkel.getDaftarKendaraan().isEmpty() || bengkel.getDaftarMekanik().isEmpty()) {
+                    System.out.println("Gagal: butuh minimal 1 kendaraan dan 1 mekanik.");
+                    break;
+                }
+                bengkel.tampilkanDaftarKendaraan();
+                System.out.print("Pilih nomor kendaraan: ");
+                String pilihKendaraan = sc.nextLine().trim();
+                bengkel.tampilkanDaftarMekanik();
+                System.out.print("Pilih nomor mekanik  : ");
+                String pilihMekanik = sc.nextLine().trim();
+
+                System.out.print("ID Servis            : ");
+                String idServis = sc.nextLine().trim();
+                System.out.print("Tanggal Servis       : ");
+                String tanggal = sc.nextLine().trim();
+                System.out.print("Keluhan              : ");
+                String keluhan = sc.nextLine().trim();
+                System.out.print("Biaya Jasa           : ");
+                String biayaJasaInput = sc.nextLine().trim();
+                System.out.print("Biaya Suku Cadang    : ");
+                String biayaSukuCadangInput = sc.nextLine().trim();
+
+                try {
+                    int idxKendaraan = Integer.parseInt(pilihKendaraan) - 1;
+                    int idxMekanik = Integer.parseInt(pilihMekanik) - 1;
+                    if (idxKendaraan < 0 || idxKendaraan >= bengkel.getDaftarKendaraan().size()
+                            || idxMekanik < 0 || idxMekanik >= bengkel.getDaftarMekanik().size()) {
+                        System.out.println("Gagal: nomor pilihan tidak valid.");
+                        break;
+                    }
+                    Mekanik mekanik = bengkel.getDaftarMekanik().get(idxMekanik);
+                    if (!mekanik.cekKetersediaan()) {
+                        System.out.println("Gagal: mekanik masih menangani servis aktif.");
+                        break;
+                    }
+                    Servis servis = new Servis(idServis, tanggal, keluhan,
+                            bengkel.getDaftarKendaraan().get(idxKendaraan), mekanik,
+                            Double.parseDouble(biayaJasaInput),
+                            Double.parseDouble(biayaSukuCadangInput));
+                    if (bengkel.buatServis(servis)) {
+                        System.out.println("Servis berhasil dibuat.");
+                    } else {
+                        System.out.println("Gagal: data servis tidak valid.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Gagal: nomor pilihan dan biaya harus berupa angka.");
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Gagal: " + e.getMessage());
+                }
                 break;
+            }
             case "4":
                 bengkel.tampilkanDaftarKendaraan();
                 break;
             case "5":
                 bengkel.tampilkanDaftarMekanik();
+                break;
+            case "6":
+                bengkel.tampilkanLaporan();
+                break;
+            case "7":
+            case "8":
+                System.out.println("Fitur belum tersedia.");
                 break;
             case "9":
                 System.out.println("Terima kasih. Program selesai.");

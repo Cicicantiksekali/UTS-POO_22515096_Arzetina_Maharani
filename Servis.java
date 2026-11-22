@@ -5,6 +5,8 @@ public class Servis {
     private double biayaJasa;
     private double biayaSukuCadang;
     private boolean statusAktif;
+    private Kendaraan kendaraan;
+    private Mekanik mekanik;
 
     public Servis() {
         this.statusAktif = true;
@@ -21,6 +23,26 @@ public class Servis {
         this.biayaJasa = biayaJasa;
         this.biayaSukuCadang = biayaSukuCadang;
         this.statusAktif = true;
+    }
+
+    public Servis(String idServis, String tanggalServis, String keluhan,
+                  Kendaraan kendaraan, Mekanik mekanik,
+                  double biayaJasa, double biayaSukuCadang) {
+        this(idServis, tanggalServis, keluhan, biayaJasa, biayaSukuCadang);
+        this.kendaraan = kendaraan;
+        this.mekanik = mekanik;
+    }
+
+    public Kendaraan getKendaraan() {
+        return kendaraan;
+    }
+
+    public Mekanik getMekanik() {
+        return mekanik;
+    }
+
+    public boolean isStatusAktif() {
+        return statusAktif;
     }
 
     public double hitungTotalBiaya() {
